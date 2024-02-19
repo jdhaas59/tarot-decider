@@ -95,10 +95,16 @@ tarot_df = pd.DataFrame(tarot_deck)
 
 def draw():
     # Shuffle the DataFrame 7 times
+    draw_ex = {}
     shuffled_tarot_df = tarot_df.copy()  # Make a copy of the original DataFrame
 
     for _ in range(7):
         shuffled_tarot_df = shuffled_tarot_df.sample(frac=1).reset_index(drop=True)
 
-    random_number = random.randint(0, 77)
-    return shuffled_tarot_df.iloc[random_number]
+
+    random_numbers = [random.randint(0, 77) for _ in range(3)]
+
+    for idx, d in enumerate(random_numbers):
+        draw_ex[idx] = shuffled_tarot_df.iloc[d]
+
+    return draw_ex
